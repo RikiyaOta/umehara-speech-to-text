@@ -1,0 +1,10 @@
+<p>Please upload a voice file from this form.</p>
+<form method="post" action="<%= action %>" enctype="multipart/form-data" name="inputMedia">
+  <div>
+    <label for="inputMedia">テキストに変換したい音声ファイルを選択してください</label>
+    <input type="file" name="mediaFile" accept="audio/*">
+  </div>
+  <div>
+    <input type="submit" value="送信">
+  </div>
+</form>
