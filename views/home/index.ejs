@@ -1,23 +1,32 @@
+<div class="uk-container">
+<h2 class="uk-heading-bullet">テキスト変換</h2>
+<div class="uk-comment-body uk-margin">
+  <p>テキストに変換したい音声ファイルを選択してください</p>
+</div>
 <form method="post" action="<%= startTranscriptionJobAction %>" enctype="multipart/form-data" name="inputMedia">
-  <div>
-    <label for="inputMedia">テキストに変換したい音声ファイルを選択してください</label>
-    <input type="file" name="mediaFile" accept="audio/*">
-  </div>
-  <div>
-    <input type="submit" value="送信">
-  </div>
+  <fieldset class="uk-fieldset">
+    <div class="uk-margin">
+      <input type="file" name="mediaFile" accept="audio/*">
+    </div>
+    <div class="uk-margin">
+      <input class="uk-button uk-button-primary" type="submit" value="進捗確認">
+    </div>
+  </fieldset>
 </form>
-
-<br />
-<br />
-
-<p>すでにタスクの受け付けを済ませた方は、こちらから進捗確認を行ってください。</p>
+<hr class="uk-divider-icon">
+<h2 class="uk-heading-bullet">結果確認</h2>
+<div class="uk-comment-body uk-margin">
+  <p>すでにタスクの受け付けを済ませた方は、こちらから進捗確認を行ってください。</p>
+  <p>タスクを受け付けた際の「タスク受け付け番号」が必要ですので、ご準備ください。</p>
+</div>
 <form method="get" action="<%= confirmProgressAction %>" enctype="application/json" name="confirmProgress">
-  <div>
-    <label for="inputMedia">タスク受け付け番号</label>
-    <input type="text" name="transcriptionJobId">
-  </div>
-  <div>
-    <input type="submit" value="進捗確認">
-  </div>
+  <fieldset class="uk-fieldset">
+    <div class="uk-margin uk-width-1-2">
+      <input class="uk-input" type="text" name="transcriptionJobId" placeholder="タスク受け付け番号">
+    </div>
+    <div>
+      <input class="uk-button uk-button-primary" type="submit" value="進捗確認">
+    </div>
+  </fieldset>
 </form>
+</div>
