@@ -1,0 +1,10 @@
+<% if (status === "QUEUED") { %>
+  <p>タスクを始める準備中です。もう少々お待ちください。</p>
+<% } else if (status === "IN_PROGRESS") { %>
+  <p>現在タスクを実行中です。もう少々お待ちください。</p>
+<% } else if (status === "FAILED")      { %>
+  <p>何らかの理由でエラーが発生しました。</p>
+<% } else if (status === "COMPLETED")   { %>
+  <p>タスクが完了しました。結果は以下です。</p>
+  <pre><%= transcriptText %></pre>
+<% } %>

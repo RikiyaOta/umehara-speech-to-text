@@ -18,6 +18,41 @@ const startTranscriptionJob = (fileContent, fileMimetype) => {
     .then(()=>({transcriptionJobId}));
 };
 
+const confirmTranscriptionJobStatus = (transcriptionJobId) => {
+
+  const checkTranscriptionJobStatus = (data) => {
+    switch (data.TranscriptionJob.TranscriptionJobStatus) {
+      case "QUEUED":
+      case "IN_PROGRESS":
+      case "FAILED":
+        return {status: data.TranscriptionJob.TranscriptionJobStatus};
+        break;
+      case "COMPLETED":
+        return {status: data.TranscriptionJob.TranscriptionJobStatus, transcriptFileUri: data.TranscriptionJob.Transcript.TranscriptFileUri};
+        break;
+    }
+  };
+
+  const getTranscriptTextIfCompleted = (data) => {
+    switch (data.status) {
+      case "QUEUED":
+      case "IN_PROGRESS":
+      case "FAILED":
+        return {status: data.status};
+        break;
+      case "COMPLETED":
+        return TranscribeRepository.getTranscriptionText(data.transcriptFileUri)
+          .then( transcriptText => ({status: data.status, transcriptText}) );
+        break;
+    }
+  };
+
+  return TranscribeRepository.getTranscriptionJob(transcriptionJobId)
+    .then(checkTranscriptionJobStatus)
+    .then(getTranscriptTextIfCompleted);
+}
+
 module.exports = {
   startTranscriptionJob,
+  confirmTranscriptionJobStatus,
 };

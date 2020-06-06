@@ -14,6 +14,9 @@ const upload = (fileContent, mimetype, transcriptionJobId) => {
   return s3.upload(params).promise();
 };
 
+const getTranscriptResult = (transcriptFileUrl) => {
+};
+
 module.exports = {
   upload,
 };
