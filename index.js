@@ -1,14 +1,15 @@
-const express      = require("express");
-const app          = express();
-const multer       = require("multer");
-const cookieParser = require("cookie-parser");
-const upload       = multer({limits: {fileSize: 5 * 10 ** 6}}); // 5 MB
-
+const express        = require("express");
+const app            = express();
+const multer         = require("multer");
+const cookieParser   = require("cookie-parser");
+const upload         = multer({limits: {fileSize: 5 * 10 ** 6}}); // 5 MB
+const expressLayouts = require('express-ejs-layouts');
 const homeController             = require("./controllers/homeController");
 const transcriptionJobController = require("./controllers/transcriptionJobController");
 const Endpoint                   = require("./endpoints");
 
 app.use(cookieParser());
+app.use(expressLayouts);
 app.set("view engine", "ejs");
 app.get( Endpoint.home,                                                 homeController.home);
 app.post(Endpoint.transcriptionJob.start,   upload.single("mediaFile"), transcriptionJobController.startTranscriptionJob);
